@@ -1,9 +1,9 @@
 ##
 ## makefile for ftl in /home/nomad/C/ftl/barrea_m
-## 
+##
 ## Made by BARREAU Martin
 ## Login   <barrea_m@etna-alternance.net>
-## 
+##
 ## Started on  Mon Nov  6 09:07:33 2017 BARREAU Martin
 ## Last update Fri Nov 10 18:26:28 2017 BARREAU Martin
 ##
@@ -28,6 +28,12 @@ SRC =		air_sched.c		\
 		main.c
 OBJS =		$(SRC:%.c=%.o)
 RM =		rm -f
+
+OS := $(shell uname)
+
+ifeq ($(OS), Darwin)
+	SDL_FLAGS := -I/usr/local/lib/SDL -L/usr/local/lib/ -lSDLmain -Wl,-framework,Cocoa $(SDL_FLAGS)
+endif
 
 all:			$(LIB_NAME) $(OBJS) $(NAME)
 
